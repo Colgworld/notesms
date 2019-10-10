@@ -4,8 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const http = require('http');
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
+
+// Routes
 var indexRouter = require('./routes/index');
+var signupRouter = require('./routes/signup');
+var registerRouter = require('./routes/register');
 var usersRouter = require('./routes/users');
+var smsRouter = require('./routes/sms');
 
 var app = express();
 
@@ -19,8 +26,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Views
 app.use('/', indexRouter);
+app.use('/signup', signupRouter);
+app.use('/register', registerRouter);
 app.use('/users', usersRouter);
+app.use('/sms', smsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,5 +48,10 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+http.createServer(app).listen(1337, () => {
+  console.log('Express server listening on port 1337');
+});
+
 
 module.exports = app;
