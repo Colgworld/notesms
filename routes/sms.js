@@ -10,11 +10,15 @@ router.get('/', function(req, res, next) {
 router.post('/', (req, res) => {
   const twiml = new MessagingResponse();
   
-  twiml.message('Works ~~~~~~~~~~!');
+  twiml.message('Noted!');
 
-  res.writeHead(200, {'Content-Type': 'text/xml'});
-  res.end(twiml.toString());
+  // console.log(twiml.toString());
+  console.log(req.body);
+  // twiml.message('It looks like your phone number was born in ' + req.body);
+  // res.writeHead(200, {'Content-Type': 'text/xml'});
+  // res.end(twiml.toString());
   res.render('sms', { title: 'SMS boi' });
 });
 
 module.exports = router;
+

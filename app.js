@@ -9,7 +9,7 @@ const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 // Routes
 var indexRouter = require('./routes/index');
-var signupRouter = require('./routes/signup');
+var signinRouter = require('./routes/signin');
 var registerRouter = require('./routes/register');
 var usersRouter = require('./routes/users');
 var smsRouter = require('./routes/sms');
@@ -28,8 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Views
 app.use('/', indexRouter);
-app.use('/signup', signupRouter);
 app.use('/register', registerRouter);
+app.use('/signin', signinRouter);
 app.use('/users', usersRouter);
 app.use('/sms', smsRouter);
 
