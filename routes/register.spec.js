@@ -34,10 +34,12 @@ describe('Register', function () {
     await clearDb();
     this.session = Session();
     this.newUserData = {
-      username: 'test_user',
+      firstName: 'test_firstName',
+      lastName: 'test_lastName',
       password: 'test_password',
       confirmPassword: 'test_password',
-      fullPhone: '+523321678080',
+      role: null,
+      phoneNumber: '+523321678080',
       verificationMethod: 'sms',
     };
   });
@@ -49,7 +51,7 @@ describe('Register', function () {
       .expect('Location', '/');
   });
 
-  it('username exists raises failure', async function () {
+  it('phone number exists raises failure', async function () {
     await this.session.post('/register')
       .send(this.newUserData)
       .expect(302)
@@ -59,15 +61,15 @@ describe('Register', function () {
       .send(this.newUserData)
       .expect((res) => {
         const $ = cheerio.load(res.text);
-        const usernameValidationMsg = $('#username > .invalid-feedback').html();
-        usernameValidationMsg.should.equal('Username already exists.');
+        const phoneValidationMsg = $('#fullPhone > .invalid-feedback').html();
+        phoneValidationMsg.should.equal('Phone number already exists.');
       })
       .expect(400);
   });
 
   it('create user, logout and log back in', async function () {
     const logInData = {
-      username: this.newUserData.username,
+      phoneNumber: this.newUserData.phoneNumber,
       password: this.newUserData.password,
     };
     await this.session.post('/register')

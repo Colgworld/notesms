@@ -42,11 +42,11 @@ passport.deserializeUser((id, done) => {
   db.User.findByPk(id).then((user) => { done(null, user); });
 });
 passport.use(new Strategy(
-  ((username, password, done) => {
+  ((phoneNumber, password, done) => {
     // log.debug({ username, password });
     // log.debug(process.env.NODE_ENV);
     db.User.findOne({
-      where: { username },
+      where: { phoneNumber },
     })
       .then((user) => {
         // log.debug(user);

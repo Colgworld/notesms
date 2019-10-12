@@ -7,16 +7,19 @@ module.exports = {
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    username: {
+    firstName: {
       type: Sequelize.STRING,
-      unique: true,
       allowNull: false,
     },
-    password: {
+    lastName: {
       type: Sequelize.STRING,
       allowNull: false,
     },
     phoneNumber: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    password: {
       type: Sequelize.STRING,
       allowNull: false,
     },
@@ -26,10 +29,6 @@ module.exports = {
     verificationMethod: {
       type: Sequelize.STRING,
       allowNull: false,
-    },
-    notes: {
-      type: Sequelize.STRING,
-      allowNull: true,
     },
     createdAt: {
       allowNull: false,

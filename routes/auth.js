@@ -31,13 +31,13 @@ loginRouter.post('/', (req, res, next) => {
       return res.redirect('/');
     }
     const errors = { wasValidated: true };
-    const { username, password } = req.body;
+    const { phoneNumber, password } = req.body;
 
     // eslint-disable-next-line no-param-reassign
-    user = await db.User.findOne({ where: { username } });
+    user = await db.User.findOne({ where: { phoneNumber } });
 
     if (user === null) {
-      errors.username = 'Username does not exist.';
+      errors.phoneNumber = 'Phone Number does not exist.';
     } else if (!user.isValidPassword(password)) {
       errors.password = 'Incorrect password';
     }

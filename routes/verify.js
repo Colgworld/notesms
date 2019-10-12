@@ -23,7 +23,7 @@ router.get('/', ensureLoggedIn(), async (req, res) => {
 
     logger.debug(verificationRequest);
 
-    return res.render('verify', { title: 'Verify', user: req.user, errors });
+    return res.render('verify', { title: 'Verify', user: req.phoneNumber, errors });
   }
 
   throw new Error('User already has `access secret content` role.');

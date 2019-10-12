@@ -7,11 +7,11 @@ block content
       thead
         tr
           th(scope='col') Id
-          th(scope='col') Username
           th(scope='col') PhoneNumber
       tbody
         each user in users
           tr
             td(scope='row') #{user.id}
-            td #{user.username}
+            td #{user.firstName}
+            td #{user.lastName}
             td #{user.phoneNumber}

@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', ensureLoggedIn(), async (req, res) => {
   const users = await db.User.findAll();
-  res.render('users', { title: 'Users', users });
+  res.render('users', { title: 'Users', phoneNumber });
 });
 
 module.exports = router;

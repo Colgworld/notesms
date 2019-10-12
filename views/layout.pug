@@ -24,7 +24,7 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
     ul.navbar-nav.ml-auto
         if user
           li.nav-item
-            p.navbar-text Welcome, #{user.username}
+            p.navbar-text Welcome, #{user.firstName}
           li.nav-item
             a.nav-link(href='/logout') Log Out
         else

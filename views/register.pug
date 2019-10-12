@@ -10,18 +10,30 @@ block content
               method='post',
               novalidate=''
           )
-          .form-group#username
-            label(for='username') Username
+          .form-group#firstName
+            label(for='firstName') First Name
             input.form-control(
-              name='username',
+              name='firstName',
               type='text',
               required='',
-              placeholder='Username',
-              class={ "is-invalid": errors.username }
+              placeholder='First Name',
+              class={ "is-invalid": errors.firstName }
             )
-            if errors.username
+            if errors.firstName
                 .invalid-feedback
-                  | #{errors.username}
+                  | #{errors.firstName}
+          .form-group#lastName
+            label(for='lastName') Last Name
+            input.form-control(
+              name='lastName',
+              type='text',
+              required='',
+              placeholder='Last Name',
+              class={ "is-invalid": errors.lastName }
+            )
+            if errors.lastName
+                .invalid-feedback
+                  | #{errors.lastName}
           .form-group#password
             label(for='password') Password
             input.form-control(

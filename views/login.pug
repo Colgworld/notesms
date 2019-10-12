@@ -10,17 +10,20 @@ block content
           method='post',
           novalidate=''
         )
-          .form-group
-              label(for='username') Username
-              input.form-control#username(
-                name='username',
-                required='',
-                placeholder='Username',
-                class={ "is-invalid": errors.username }
-              )
-              if errors.username
-                .invalid-feedback
-                  | #{errors.username}
+          .form-group#phoneNumber
+            label(for='phoneNumber') Phone Number
+            div
+                input.form-control(
+                  type='tel',
+                  name='phoneNumber',
+                  required='',
+                  placeholder='Phone Number',
+                  class={ "is-invalid": errors.phoneNumber }
+                )
+                if errors.phoneNumber
+                    .invalid-feedback
+                      | #{errors.phoneNumber}
+            br
           .form-group
               label(for='password') Password
               input.form-control#password(

@@ -15,18 +15,20 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
   const {
-    username,
+    firstName,
+    lastName,
+    fullPhone: phoneNumber,
     password,
     confirmPassword,
-    fullPhone: phoneNumber,
+    role,
     verificationMethod,
   } = req.body;
 
   const errors = {};
-  const user = await db.User.findOne({ where: { username } });
+  const phone = await db.User.findOne({ where: { phoneNumber } });
 
-  if (user !== null) {
-    errors.username = 'Username already exists.';
+  if (phone !== null) {
+    errors.fullPhone = 'Phone number already exists.';
   }
 
   if (password !== confirmPassword) {
@@ -34,7 +36,7 @@ router.post('/', async (req, res) => {
   }
 
   if (phoneNumber === undefined || phoneNumber === '') {
-    errors.phoneNumber = 'Phone Number is required.';
+    errors.fullPhone = 'Phone Number is required.';
   }
 
   if (Object.keys(errors).length === 0) {
@@ -42,9 +44,11 @@ router.post('/', async (req, res) => {
 
     try {
       await db.User.create({
-        username,
-        password: hashed_password,
+        firstName,
+        lastName,
         phoneNumber,
+        password: hashed_password,
+        role,
         verificationMethod,
       });
     } catch (e) {
@@ -56,7 +60,7 @@ router.post('/', async (req, res) => {
     res.redirect('/');
   } else {
     errors.wasValidated = true;
-    res.status(400).render('register', { title: 'Register', errors });
+    // res.status(400).render('register', { title: 'Register', errors });
   }
 });
 
