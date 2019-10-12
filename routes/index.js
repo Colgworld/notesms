@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+const { ensureLoggedIn } = require('connect-ensure-login');
+const express = require('express');
+const userRoles = require('../userRoles');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+const router = express.Router();
+
+router.get(
+  '/',
+  ensureLoggedIn(),
+  userRoles.can('access secret content'),
+  (req, res) => {
+    res.render('index', { title: 'Secrets', user: req.user });
+  },
+);
 
 module.exports = router;

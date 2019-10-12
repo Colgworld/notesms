@@ -1,9 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const { ensureLoggedIn } = require('connect-ensure-login');
+const db = require('../models');
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+const router = express.Router();
+
+router.get('/', ensureLoggedIn(), async (req, res) => {
+  const users = await db.User.findAll();
+  res.render('users', { title: 'Users', users });
 });
 
 module.exports = router;
