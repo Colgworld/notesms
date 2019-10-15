@@ -13,32 +13,33 @@ router.get('/',
     res.render('index', { title: 'SMS', user: user.username });
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
   const twiml = new MessagingResponse();
   var note_id = UUID.generate();
 
   var users;
-    if (users == null) {
-      const users = db.User.findOne({ where: { phoneNumber: req.body.From } });
-    } else {
-      console.log(`username = ` + user.username)
-    }
-  const userInfo = db.Notes.findAll();
-  console.log(userInfo)
-  
-  // const notes = await db.Notes.create({
-  //   note_id: note_id,
-  //   username: users.username,
-  //   note: req.body.Body,
-  //   categories: null,
-  //   phoneNumber: req.body.From,
-  // },
-  //  {returning: true}
-  // )
-  // .catch(null);
+  if (!users) {
+    var users = await db.User.findOne({ where: { phoneNumber: req.body.From } });
+  } else {
+    console.log(`username = ` + users.username)
+  }
 
-  twiml.message('Noted!');
-  res.render('sms', { title: 'SMS boi', user: users.username, notes: notes.note });
+  try { 
+    const notes = await db.Notes.create({
+      note_id: note_id,
+      username: users.username,
+      note: req.body.Body,
+      categories: null,
+      phoneNumber: req.body.From,
+    })
+  } catch(err) {
+    console.log(err, req.body);
+  }
+
+
+
+  twiml.message('Notedasdfasdfasdf!');
+  res.render('sms', { title: 'SMS boi', user: users.username});
 
   res.end(twiml.toString());
 });
