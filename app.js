@@ -9,12 +9,16 @@ const path = require('path');
 const { Strategy } = require('passport-local');
 const flash = require('flash');
 const cookieSession = require('cookie-session');
+const bodyParser = require('body-parser');
+
+// Routes
 const usersRouter = require('./routes/users');
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const verifyRouter = require('./routes/verify');
 const registerRouter = require('./routes/register');
 const smsRouter = require('./routes/sms');
+
 const db = require('./models');
 const userRoles = require('./userRoles');
 
@@ -30,9 +34,17 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// app.use(function (req, res) {
+//   res.setHeader('Content-Type', 'text/plain')
+//   res.write('you posted:\n')
+//   res.end()
+// })
 
 // initialize authentication middleware
 passport.serializeUser((user, cb) => {
