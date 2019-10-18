@@ -18,17 +18,17 @@ router.post('/', async (req, res, next) => {
   var note_id = UUID.generate();
   var user_info;
   var notes;
+  var incomingNumber = req.body.From || req.user.phoneNumber;
 
-  if (user_info === undefined || user_info.length == 0) {
-    user_info = await db.User.findAll({ 
-      raw: true,
-      where: { 
-        phoneNumber: req.body.From, 
-      }
-    });
-  } else {
-    null
-  }
+  user_info = await db.User.findAll({ 
+    raw: true,
+    where: { 
+      phoneNumber: incomingNumber, 
+    }
+  });
+
+
+  console.log(JSON.stringify(req.body));
 
   try { 
     notes = await db.Notes.create({
@@ -36,24 +36,21 @@ router.post('/', async (req, res, next) => {
       username: user_info[0].username,
       note: req.body.Body,
       categories: null,
-      phoneNumber: req.body.From,
+      phoneNumber: incomingNumber,
     })
   } catch(err) {
-    res.render('error', { 
-      status: res.status,
-      reqbody: req.body
-      });
+    console.log(err)
   }
 
   twiml.message('Got it!');
   twiml.toString()
   res.render('notes', { 
    title: 'NOTES',
-   note_id: notes.id, 
-   note: notes.note,
-   username: notes.username, 
-   phoneNumber: notes.phoneNumber,
-   data: notes
+   note_id: note_id, 
+   note: req.body.Body,
+   username: user_info[0].username, 
+   phoneNumber: incomingNumber,
+   notes: notes,
   });
 });
 

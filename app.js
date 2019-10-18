@@ -18,6 +18,7 @@ const authRouter = require('./routes/auth');
 const verifyRouter = require('./routes/verify');
 const registerRouter = require('./routes/register');
 const smsRouter = require('./routes/sms');
+const analyzeRouter = require('./routes/analyze');
 
 const db = require('./models');
 const userRoles = require('./userRoles');
@@ -92,6 +93,7 @@ app.use('/register', registerRouter);
 app.use('/users', usersRouter);
 app.use('/verify', verifyRouter);
 app.use('/sms', smsRouter);
+app.use('/analyze', analyzeRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

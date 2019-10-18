@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "eminent-booking-256303",
+  "private_key_id": "b5298a13190e555697dcedc144dfacc19be0b437",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDHWz1rPtI//IyL\nTal57FU9He5iukU/bKCKeEvfZLWy/bsHITqBzEUsIU/ZNy8sAJZ9FGUZdBH8Suvj\nmaSKY87l8sqYxTYXv6nhFuIghDrPeYIjturl43VcU/WWXqW5DxxK41z2a628wuJ6\nfmAWxYsfaZOp2j6U3aQ/84jV4KIZPoCywV9alWGHZeytli8RHgtnrwKbx3/MTCPk\nHrzVXQX1j9S2yscIO5ggN10VgQelXfqDB44m5/uhVtQmpXgapKclKDjEWFl/lLlh\nsQAWAfgNnhgbJAALSK42ikiUBM90mbgcAHQlNpFDnOFqq4xwY00yUcxqSX0Cv8YF\n4Zku/FJLAgMBAAECggEAFB0NqyfZRlEV4aonarXgUGcYLvLUhhZ7c20OrqPLvJri\nnKYKxUoVl+MRL30PWn+sBJj4WE3rJfVt1kv2m2sq1pgdPmD2A7BilI4JU4wzyMyy\nx3qu5ByDse8wod1mbVpBGayAgRuSbwSJ8so+/0fVW7PRt6XdgYnZMVtCAjOEofTh\ncmgmKTAgvADiBCU4t+4MjMuylAL4l/GICaNt3HHba+QeiYL77o9j0hVuvQGYrdLW\nNFYnmGOs42p8kdrhy3uiV9GyS0KaQgaCmHhsvfXRFVbovi747/wP2yM4V+UZz4Vj\n4dwml1mGv7Q3lXrYgWDeYB1Xxs50a4WMLYe3rbXxnQKBgQD41ZvGI+FAJp2XLBMY\nRq+1pZERwuEz+gy7Kdh6nBAo79G7XBj/CXdRAwbwOeQZPBt/IZ04EfmaPafQ4AMP\n6OAgh5OG5ZkMfxaAQVcLnB1auOy6yM2yNmn/9fL5SomR2BH7aDN8HZDCHNWe+i+J\ndEs+wV1ruiarHH95byaVgxi3JwKBgQDNGOH6PLMw+CI9S0luuRUETF0waWM/6Ab/\n95OtxtbfoE3CaUotlEIPNwDWLPMr7agZSsCXwzqW7kfabFidLuR66yQxcvo4XG8z\n8hCkvMygxULo29mOBMm6cl1Ya3AdV8z3SkO/HdjYvOCLDRAq2qQuVNTd3Zl/IYIO\n0e6fL36iPQKBgDhLw3lZZr2nvuGTtCI648fZ1G9LQr4KpVS2y+Y5ZqKMV0vnMzSI\nBLmMUMaKomNfKO1jQnmL/4d4yX3FIIw56HMTmTncufqMyh9sKPBUeoOq8Mv1YCwg\niWzCTR0/Us5vLupNEdDTs4tnEKFuAtE7QUbKYoNb0yHFScXEcttClJXjAoGBAKha\nmIR0dxLnXBO8TRbaTmos1QH8QEAhEj3i2BJ5ecAvMiU3kHBBlsguej1UwHd6qdW5\nCsaItvtVtR2SelrsNxi/FAKTQtoo5g9Z0Fepsr71raq/bKGrRHwLjJwb9PfhLpp/\nF4U11t5yjE8X9gF3X/W4JNPKJ0m4E65enOWGcwhxAoGBAKScnitZf4YDwYdnFMiU\nQLrWxVwQ9/1d/8JJ/ppYHJHkvb5Tkbf9ZDFeXP5U1KRtOQjU3xQlgE35lnafyyVQ\nNcm9Zlw845B64yaiVRZKSeWjHafNY73AaTq8humh0e4tihSv5ECAo4SX/Tz54nFt\np9IsGdXznR0S4tp5W8AbPFs0\n-----END PRIVATE KEY-----\n",
+  "client_email": "notesms@eminent-booking-256303.iam.gserviceaccount.com",
+  "client_id": "114484563762770780408",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/notesms%40eminent-booking-256303.iam.gserviceaccount.com"
+}

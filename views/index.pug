@@ -4,3 +4,9 @@ block content
   .container
     h1 #{title}
     p Congratulations #{user.username}, you have accessed the secret content! Phone Number: #{user.phoneNumber}
+    div
+    form(action='/sms', method='POST')
+      p
+        | Text YoSelf: 
+        input(type='text', name='note', value='')
+      input(type='submit', value='Submit')
