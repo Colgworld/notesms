@@ -20,6 +20,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    wasAnalyzed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+    },
+    analyzedNote: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   });
 
   // eslint-disable-next-line no-unused-vars

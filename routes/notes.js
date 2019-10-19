@@ -13,6 +13,7 @@ router.get('/',
     res.render('index', { title: 'SMS', user: user.username, phoneNumber: user.phoneNumber });
 });
 
+// Look up User and store note to DB
 router.post('/', async (req, res, next) => {
   const twiml = new MessagingResponse();
   var note_id = UUID.generate();
@@ -26,9 +27,6 @@ router.post('/', async (req, res, next) => {
       phoneNumber: incomingNumber, 
     }
   });
-
-
-  console.log(JSON.stringify(req.body));
 
   try { 
     notes = await db.Notes.create({

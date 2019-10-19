@@ -17,7 +17,7 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const verifyRouter = require('./routes/verify');
 const registerRouter = require('./routes/register');
-const smsRouter = require('./routes/sms');
+const notesRouter = require('./routes/notes');
 const analyzeRouter = require('./routes/analyze');
 
 const db = require('./models');
@@ -92,7 +92,7 @@ app.use('/', authRouter);
 app.use('/register', registerRouter);
 app.use('/users', usersRouter);
 app.use('/verify', verifyRouter);
-app.use('/sms', smsRouter);
+app.use('/notes', notesRouter);
 app.use('/analyze', analyzeRouter);
 
 // catch 404 and forward to error handler

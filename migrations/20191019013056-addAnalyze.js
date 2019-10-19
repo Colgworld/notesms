@@ -27,6 +27,14 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false,
     },
+    wasAnalyzed: {
+      type: Sequelize.BOOLEAN,
+      allowNull: true,
+    },
+    analyzedNote: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
     createdAt: {
       allowNull: false,
       type: Sequelize.DATE,
