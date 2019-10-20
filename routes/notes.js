@@ -6,11 +6,42 @@ const db = require('../models');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const UUID = require("uuidjs");
 
+var notes_controller = require('../controllers/notesController');
+
+// GET catalog home page.
+router.get('/', notes_controller.index);
+
+// GET request for creating a Note. NOTE This must come before routes that display Note (uses id).
+router.get('/notes/create', notes_controller.notes_create_get);
+
+// POST request for creating Note.
+router.post('/notes/create', notes_controller.notes_create_post);
+
+// GET request to delete Note.
+router.get('/notes/:id/delete', notes_controller.notes_delete_get);
+
+// POST request to delete Note.
+router.post('/notes/:id/delete', notes_controller.notes_delete_post);
+
+// GET request to update Note.
+router.get('/notes/:id/update', notes_controller.notes_update_get);
+
+// POST request to update Note.
+router.post('/notes/:id/update', notes_controller.notes_update_post);
+
+// GET request for one Note.
+// router.get('/notes/:id', notes_controller.notes_detail);
+
+// GET request for list of all Note items.
+router.get('/notes', notes_controller.notes_list);
+
 router.get('/', 
   ensureLoggedIn(), 
   userRoles.can('access secret content'), 
   (req, res) => {
-    res.render('index', { title: 'SMS', user: user.username, phoneNumber: user.phoneNumber });
+    console.log(req.params.username)
+
+    res.render('index', { title: 'SMS'});
 });
 
 // Look up User and store note to DB
@@ -53,16 +84,3 @@ router.post('/', async (req, res, next) => {
 });
 
 module.exports = router;
-
-// Example Post
-// app.post('/sms', (req, res) => {
-//   const twiml = new MessagingResponse();
-
-//   twiml.message('The Robots are coming! Head for the hills!');
-
-//   res.end(twiml.toString());
-// });
-
-// http.createServer(app).listen(1337, () => {
-//   console.log('Express server listening on port 1337');
-// });

@@ -41,12 +41,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(function (req, res) {
-//   res.setHeader('Content-Type', 'text/plain')
-//   res.write('you posted:\n')
-//   res.end()
-// })
-
 // initialize authentication middleware
 passport.serializeUser((user, cb) => {
   cb(null, user.id);
