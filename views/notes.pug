@@ -6,15 +6,13 @@ block content
     table.table.table-bordered(style='width:100%', border='1')
       thead
         tr
-          th(scope='col') Id
-          th(scope='col') Username
-          th(scope='col') PhoneNumber
           th(scope='col') Notes
+          th(scope='col') Username
+          th(scope='col') Phone Number
       tbody
-          each note in notes
+          for note in results
             td= note
           tr
-            td(scope='row') #{note_id}
-            td #{username}
-            td #{phoneNumber}
-            td #{note}
+            td(scope='row') #{results.note}
+            td #{results.username}
+            td #{results.phoneNumber}
