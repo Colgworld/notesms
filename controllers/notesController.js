@@ -10,7 +10,6 @@ var Note = require('../models/notes');
 // GET list of a Users Notes.
 async function index(req, res) {
   var notes;
-  var results;
     
   try { 
     notes = await db.Notes.findAll({ 
@@ -23,11 +22,11 @@ async function index(req, res) {
     console.log(err)
   }
 
-  results = JSON.stringify(notes)
-
+  notes = JSON.parse(JSON.stringify(notes))
+  console.log(notes)
   res.render('notes', { 
     title: 'NOTES',
-    results: results,
+    results: notes,
   });
 };
 
