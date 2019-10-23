@@ -74,8 +74,31 @@ async function notes_create_post(req, res) {
   });
 };
 
-// Display Note delete form on GET.
-async function notes_delete_get(req, res) {
+// Get single Note info
+async function notes_get_note(req, res) {
+  var note;
+  
+  try { 
+    note = await db.Notes.findOne({ 
+      where: {
+        note_id: req.params.note_id
+      },
+      raw: true,
+    })
+  } catch(err) {
+    console.log(err)
+  }
+
+  note = JSON.parse(JSON.stringify(note))
+  console.log(note)
+  res.render('notes', { 
+    title: 'GET NOTE',
+    results: note,
+  });
+};
+
+// Handle Note delete on POST.
+async function notes_delete_post(req, res) {
   var note_info;
 
   if(note_info == null || undefined ){
@@ -90,21 +113,12 @@ async function notes_delete_get(req, res) {
     res.send(`Deleted ${note_info.note_id} that said ${note_info.note}`);
 };
 
-// Handle Note delete on POST.
-exports.notes_delete_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Note delete POST');
-};
-
-// Display Note update form on GET.
-exports.notes_update_get = function(req, res) {
-    res.send('NOT IMPLEMENTED: Note update GET');
-};
-
 // Handle Note update on POST.
 exports.notes_update_post = function(req, res) {
     res.send('NOT IMPLEMENTED: Note update POST');
 };
 
 module.exports.notes_create_post = notes_create_post
-module.exports.notes_delete_get = notes_delete_get
+module.exports.notes_delete_post = notes_delete_post
+module.exports.notes_get_note = notes_get_note
 module.exports.index = index

@@ -6,12 +6,11 @@ block content
     table.table.table-bordered(style='width:100%', border='1')
       thead
         tr
-          th(scope='col') Username  
-          th(scope='col') Notes
           th(scope='col') Phone Number
+          th(scope='col') Notes
       tbody
           each note in results
             tr
-              td= note.username
-              td= note.note
               td= note.phoneNumber
+              td
+                a(href='notes/' + note.note_id)= note.note

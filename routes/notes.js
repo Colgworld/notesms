@@ -14,14 +14,11 @@ router.get('/', notes_controller.index);
 // POST request for creating Note.
 router.post('/create', notes_controller.notes_create_post);
 
-// GET request to delete Note.
-router.get('/:note_id/delete', notes_controller.notes_delete_get);
-
 // POST request to delete Note.
 router.post('/:note_id/delete', notes_controller.notes_delete_post);
 
-// GET request to update Note.
-router.get('/:note_id/update', notes_controller.notes_update_get);
+
+router.get('/:note_id/', notes_controller.notes_get_note);
 
 // POST request to update Note.
 router.post('/:note_id/update', notes_controller.notes_update_post);
