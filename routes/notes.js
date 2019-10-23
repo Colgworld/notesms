@@ -15,9 +15,9 @@ router.get('/', notes_controller.index);
 router.post('/create', notes_controller.notes_create_post);
 
 // POST request to delete Note.
-router.post('/:note_id/delete', notes_controller.notes_delete_post);
+router.get('/:note_id/delete', notes_controller.notes_delete_post);
 
-
+// GET a single Note
 router.get('/:note_id/', notes_controller.notes_get_note);
 
 // POST request to update Note.

@@ -8,8 +8,12 @@ block content
         tr
           th(scope='col') Phone Number
           th(scope='col') Notes
+          th(scope='col') Action
       tbody
             tr
               td= results.phoneNumber
               td
-                a(href='notes/' + results.note_id)= results.note
+                p(href= results.note_id)= results.note
+              td  
+                a(href= results.note_id + "/delete")
+                  button(type="button") delete note

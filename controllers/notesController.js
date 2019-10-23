@@ -23,7 +23,7 @@ async function index(req, res) {
   }
 
   notes = JSON.parse(JSON.stringify(notes))
-  console.log(notes)
+
   res.render('notes', { 
     title: 'NOTES',
     results: notes,
@@ -74,7 +74,7 @@ async function notes_create_post(req, res) {
   });
 };
 
-// Get single Note info
+// Get a single Note's info
 async function notes_get_note(req, res) {
   var note;
   
@@ -99,18 +99,23 @@ async function notes_get_note(req, res) {
 
 // Handle Note delete on POST.
 async function notes_delete_post(req, res) {
-  var note_info;
-
-  if(note_info == null || undefined ){
-      note_info = await db.Notes.destroy({
-          where: {
-              note_id: note_info.note_id
-          }
-      })
-    } else {
-      null
+  var notes;
+  try { 
+    notes = await db.Notes.destroy({ 
+      where: {
+        note_id: req.params.note_id
+      },
+      raw: true,
+    })
+  } catch(err) {
+    console.log(err)
   }
-    res.send(`Deleted ${note_info.note_id} that said ${note_info.note}`);
+  notes = JSON.parse(JSON.stringify(notes))
+
+  res.render('notes', { 
+    title: 'Current list of Notes',
+    results: notes,
+  });
 };
 
 // Handle Note update on POST.
