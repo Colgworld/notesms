@@ -91,7 +91,7 @@ async function notes_get_note(req, res) {
 
   note = JSON.parse(JSON.stringify(note))
   console.log(note)
-  res.render('notes', { 
+  res.render('singleNote', { 
     title: 'GET NOTE',
     results: note,
   });

@@ -20,6 +20,7 @@ const registerRouter = require('./routes/register');
 const notesRouter = require('./routes/notes');
 const analyzeRouter = require('./routes/analyze');
 
+
 const db = require('./models');
 const userRoles = require('./userRoles');
 

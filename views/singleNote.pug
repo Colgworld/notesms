@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  .container
+    h1 #{title}
+    table.table.table-bordered(style='width:100%', border='1')
+      thead
+        tr
+          th(scope='col') Phone Number
+          th(scope='col') Notes
+      tbody
+            tr
+              td= results.phoneNumber
+              td
+                a(href='notes/' + results.note_id)= results.note
