@@ -110,20 +110,40 @@ async function notes_delete_post(req, res) {
   } catch(err) {
     console.log(err)
   }
-  notes = JSON.parse(JSON.stringify(notes))
+  notes = JSON.stringify(notes);
 
-  res.render('notes', { 
-    title: 'Current list of Notes',
-    results: notes,
-  });
+  console.log(`Notes: ` + notes)
+  console.log(`Params: ` + JSON.stringify(req.params))
+
+  res.redirect('/notes')
 };
 
 // Handle Note update on POST.
-exports.notes_update_post = function(req, res) {
-    res.send('NOT IMPLEMENTED: Note update POST');
+async function notes_update_post(req, res) {
+  var note;
+  
+  try { 
+    note = await db.Notes.update({
+      note: req.body.note,
+      categories: req.body.category,
+      }, {
+      where: { 
+        note_id: req.params.note_id 
+      },
+      returning: true,
+      raw: true
+    })
+  } catch(err) {
+    console.log(err)
+  }
+
+  note = JSON.parse(JSON.stringify(note))
+
+  res.redirect('/notes/' + note.note_id);
 };
 
 module.exports.notes_create_post = notes_create_post
 module.exports.notes_delete_post = notes_delete_post
 module.exports.notes_get_note = notes_get_note
+module.exports.notes_update_post = notes_update_post
 module.exports.index = index

@@ -8,7 +8,8 @@ block content
         tr
           th(scope='col') Phone Number
           th(scope='col') Notes
-          th(scope='col') Action
+          th(scope='col') Delete
+          th(scope='col') Update
       tbody
             tr
               td= results.phoneNumber
@@ -17,3 +18,6 @@ block content
               td  
                 a(href= results.note_id + "/delete")
                   button(type="button") delete note
+              td  
+                a(href= results.note_id + "/update")
+                  button(type="button") update note
