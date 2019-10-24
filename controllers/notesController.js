@@ -121,25 +121,28 @@ async function notes_delete_post(req, res) {
 // Handle Note update on POST.
 async function notes_update_post(req, res) {
   var note;
-  
+  var values = { 
+    note: req.body.note,
+    categories: req.body.categories,
+  };
+  var selector = { 
+    where: { 
+      note_id: req.params.note_id 
+    },
+    returning: true,
+    raw: true
+  };
+
   try { 
-    note = await db.Notes.update({
-      note: req.body.note,
-      categories: req.body.category,
-      }, {
-      where: { 
-        note_id: req.params.note_id 
-      },
-      returning: true,
-      raw: true
-    })
+    note = await db.Notes.update(values, selector)
   } catch(err) {
     console.log(err)
   }
 
-  note = JSON.parse(JSON.stringify(note))
+  note = JSON.stringify(note)
+  console.log(`Notes: ` + note)
 
-  res.redirect('/notes/' + note.note_id);
+  res.redirect('/notes/' + req.params.note_id);
 };
 
 module.exports.notes_create_post = notes_create_post
