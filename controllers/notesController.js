@@ -10,11 +10,11 @@ var Note = require('../models/notes');
 // GET list of a Users Notes.
 async function index(req, res) {
   var notes;
-    
+  var user_id = req.user.id;
   try { 
     notes = await db.Notes.findAll({ 
       where: {
-        username: req.user.username
+        user_id: user_id
       },
       raw: true,
     })
@@ -39,31 +39,33 @@ async function notes_create_post(req, res) {
   var incomingNumber = req.body.From || req.user.phoneNumber;
   var results;
 
-  if(user_info == null || undefined ){
-      user_info = await db.User.findAll({ 
-        raw: true,
-        where: { 
-          phoneNumber: incomingNumber, 
-        }
-      });
-    } else {
-      null
+  try {
+    user_info = await db.User.findAll({ 
+      raw: true,
+      where: { 
+        phoneNumber: incomingNumber, 
+      }
+    })
+  } catch(err) {
+    console.log(err)
   }
+  // console.log(user_info)
+  // var user_id = 
+
+  // parseInt(user_id, 10);;
 
   try { 
     notes = await db.Notes.create({
+      user_id: user_info[0].id,
       note_id: note_id,
-      username: user_info[0].username,
-      note: req.body.Body,
-      categories: null,
-      phoneNumber: incomingNumber,
+      text: req.body.Body
     })
   } catch(err) {
     console.log(`Couldn't fetch notes: ` + err)
   }
   
-  results = Object.assign({}, ...notes);
-  console.log(`results: ` + results);
+  console.log(JSON.stringify(notes))
+  results = JSON.stringify(notes);
 
   twiml.message('Got it!');
   twiml.toString();
@@ -77,11 +79,14 @@ async function notes_create_post(req, res) {
 // Get a single Note's info
 async function notes_get_note(req, res) {
   var note;
+  console.log(req.body)
+  console.log(req.params)
+  console.log(req.user)  
   
   try { 
     note = await db.Notes.findOne({ 
       where: {
-        note_id: req.params.note_id
+        id: req.params.note_id
       },
       raw: true,
     })
@@ -103,7 +108,7 @@ async function notes_delete_post(req, res) {
   try { 
     notes = await db.Notes.destroy({ 
       where: {
-        note_id: req.params.note_id
+        id: req.params.note_id
       },
       raw: true,
     })
@@ -112,9 +117,6 @@ async function notes_delete_post(req, res) {
   }
   notes = JSON.stringify(notes);
 
-  console.log(`Notes: ` + notes)
-  console.log(`Params: ` + JSON.stringify(req.params))
-
   res.redirect('/notes')
 };
 
@@ -122,12 +124,11 @@ async function notes_delete_post(req, res) {
 async function notes_update_post(req, res) {
   var note;
   var values = { 
-    note: req.body.note,
-    categories: req.body.categories,
+    text: req.body.text,
   };
   var selector = { 
     where: { 
-      note_id: req.params.note_id 
+      id: req.params.note_id 
     },
     returning: true,
     raw: true

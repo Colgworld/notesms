@@ -1,32 +1,16 @@
 module.exports = (sequelize, DataTypes) => {
   const Notes = sequelize.define('Notes', {
-    username: {
+    user_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    note_id: {
+    user_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    note: {
+    text: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    categories: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
-    phoneNumber: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    wasAnalyzed: {
-      type: DataTypes.BOOLEAN,
-      allowNull: true,
-    },
-    analyzedNote: {
-      type: DataTypes.STRING,
-      allowNull: true,
     },
   });
 

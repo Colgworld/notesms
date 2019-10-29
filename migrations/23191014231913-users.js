@@ -16,10 +16,6 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    notes: {
-      type: Sequelize.STRING,
-      allowNull: true,
-    },
     phoneNumber: {
       type: Sequelize.STRING,
       allowNull: false,

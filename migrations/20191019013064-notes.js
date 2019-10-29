@@ -3,15 +3,10 @@ module.exports = {
   up: (queryInterface, Sequelize) => queryInterface.createTable('Notes', {
     id: {
       allowNull: false,
-      autoIncrement: true,
       primaryKey: true,
       type: Sequelize.INTEGER,
     },
-    username: {
-      type: Sequelize.STRING,
-      allowNull: false,
-    },
-    note: {
+    user_id: {
       type: Sequelize.STRING,
       allowNull: false,
     },
@@ -19,21 +14,9 @@ module.exports = {
       type: Sequelize.STRING,
       allowNull: false,
     },
-    categories: {
-      type: Sequelize.STRING,
-      allowNull: true,
-    },
-    phoneNumber: {
+    text: {
       type: Sequelize.STRING,
       allowNull: false,
-    },
-    wasAnalyzed: {
-      type: Sequelize.BOOLEAN,
-      allowNull: true,
-    },
-    analyzedNote: {
-      type: Sequelize.STRING,
-      allowNull: true,
     },
     createdAt: {
       allowNull: false,

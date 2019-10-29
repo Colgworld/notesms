@@ -37,17 +37,15 @@ exports.notes_create_get = async function(req, res) {
 // Handle Note create on POST.
 async function notes_create_post(req, res) {
   const twiml = new MessagingResponse();
-  var note_id = UUID.generate();
+  var id = UUID.generate();
   var user_info;
   var notes;
 
   try { 
     notes = await db.Notes.create({
-      note_id: note_id,
-      username: user_info[0].username,
-      note: req.body.Body,
-      categories: null,
-      phoneNumber: incomingNumber,
+      id: id,
+      user_id: user_info[0].user_id,
+      text: req.body.Body,
     })
   } catch(err) {
     console.log(err)
@@ -57,8 +55,8 @@ async function notes_create_post(req, res) {
   twiml.toString()
   res.render('notes', { 
    title: 'NOTES',
-   note_id: note_id, 
-   note: req.body.Body,
+   id: id, 
+   text: req.body.Body,
    username: user_info[0].username, 
    phoneNumber: incomingNumber,
    notes: notes,
@@ -87,14 +85,3 @@ exports.notes_update_get = function(req, res) {
 exports.notes_update_post = function(req, res) {
     res.send('NOT IMPLEMENTED: Note update POST');
 };
-
-// Handle Note update on GET Category.
-// exports.note_category_update_get = function(req, res) {
-//     res.send('NOT IMPLEMENTED: Note update POST');
-// };
-
-// // Handle Note update on POST.
-// exports.note_category_update_post = function(req, res) {
-//     res.send('NOT IMPLEMENTED: Note update POST Category');
-// };
-

@@ -6,18 +6,18 @@ block content
     table.table.table-bordered(style='width:100%', border='1')
       thead
         tr
-          th(scope='col') Phone Number
+          th(scope='col') Username
           th(scope='col') Notes
           th(scope='col') Delete
           th(scope='col') Update
       tbody
             tr
-              td= results.phoneNumber
+              td= user.username
               td
-                p(href= results.note_id)= results.note
+                p(href= results.id)= results.text
               td  
-                a(href= results.note_id + "/delete")
+                a(href= results.id + "/delete")
                   button(type="button") delete note
               td  
-                a(href= results.note_id + "/update")
+                a(href= results.id + "/update")
                   button(type="button") update note
