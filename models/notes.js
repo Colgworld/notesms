@@ -4,11 +4,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    user_id: {
+    note_id: {
       type: DataTypes.STRING,
       allowNull: false,
     },
     text: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    phoneNumber: {
       type: DataTypes.STRING,
       allowNull: false,
     },

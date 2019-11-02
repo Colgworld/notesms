@@ -1,15 +1,12 @@
-const { ensureLoggedIn } = require('connect-ensure-login');
 const express = require('express');
-const userRoles = require('../userRoles');
 const router = express.Router();
-const db = require('../models');
-const MessagingResponse = require('twilio').twiml.MessagingResponse;
-const UUID = require("uuidjs");
+const notes_controller = require('../controllers/notesController');
 
-var notes_controller = require('../controllers/notesController');
+// POST all Notes
+router.post('/', notes_controller.index);
 
-// GET all Notes
-router.get('/', notes_controller.index);
+// POST all Users
+router.post('/get_users', notes_controller.get_users);
 
 // POST request for creating Note.
 router.post('/create', notes_controller.notes_create_post);

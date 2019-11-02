@@ -1,87 +1,105 @@
-const { ensureLoggedIn } = require('connect-ensure-login');
-const userRoles = require('../userRoles');
 const db = require('../models');
 const express = require('express');
-const MessagingResponse = require('twilio').twiml.MessagingResponse;
 const UUID = require("uuidjs");
-
+const MessagingResponse = require('twilio').twiml.MessagingResponse;
+const twiml = new MessagingResponse();
 var Note = require('../models/notes');
 
 // GET list of a Users Notes.
 async function index(req, res) {
   var notes;
-  var user_id = req.user.id;
+  console.log(req.body)
+  var results;
+  var phoneNumber = req.body.phoneNumber;
   try { 
     notes = await db.Notes.findAll({ 
       where: {
-        user_id: user_id
+        phoneNumber: phoneNumber
       },
       raw: true,
-    })
+    });
   } catch(err) {
-    console.log(err)
+    res.send({
+      phoneNumber: phoneNumber,
+      user_id: "none",
+    });
   }
 
-  notes = JSON.parse(JSON.stringify(notes))
+  var note_text = [];
+  for(var i = 0; i < notes.length; i++) {
+    var obj = notes[i].text;
+    note_text.push(obj)
+  }
+  note_text.unshift(null)
 
-  res.render('notes', { 
-    title: 'NOTES',
-    results: notes,
+  var text = note_text.toString();
+  text.replace(/\n/g, ',')
+  var newchar = '\n - '
+  text = text.split(',').join(newchar);
+
+  result = `Here are today's notes: \n` + text;
+  res.send({ result });
+};
+
+async function get_users(req, res) {
+  var user_info;
+  var user_id;
+  var phoneNumber = req.body.phoneNumber
+
+    try {
+      user_info = await db.User.findAll({ 
+        raw: true,
+        where: { 
+          phoneNumber: phoneNumber, 
+        }
+      })
+    } catch(err) {
+      res.send({
+        user_id: "none"
+      })
+    }
+  
+  user_info = JSON.stringify(user_info);
+  user_id = user_info[0].id
+
+  console.log(user_info)
+  res.send({ 
+    phoneNumber: phoneNumber,
+    user_id: user_id,
+    user_info: user_info,
   });
 };
 
 // Handle Note create on POST.
 async function notes_create_post(req, res) {
-  const twiml = new MessagingResponse();
   var note_id = UUID.generate();
   var notes;
-  var user_info;
-  var incomingNumber = req.body.From || req.user.phoneNumber;
-  var results;
+  var phoneNumber = req.body.phoneNumber
+  var user_id;
 
   try {
-    user_info = await db.User.findAll({ 
-      raw: true,
-      where: { 
-        phoneNumber: incomingNumber, 
-      }
+    notes = await db.Notes.create({
+      user_id: user_id,
+      note_id: note_id,
+      phoneNumber: phoneNumber,
+      text: req.body.text
     })
   } catch(err) {
     console.log(err)
   }
-  // console.log(user_info)
-  // var user_id = 
 
-  // parseInt(user_id, 10);;
+  notes = JSON.stringify(notes);
 
-  try { 
-    notes = await db.Notes.create({
-      user_id: user_info[0].id,
-      note_id: note_id,
-      text: req.body.Body
-    })
-  } catch(err) {
-    console.log(`Couldn't fetch notes: ` + err)
-  }
-  
-  console.log(JSON.stringify(notes))
-  results = JSON.stringify(notes);
-
-  twiml.message('Got it!');
-  twiml.toString();
-
-  res.render('notes', { 
-   title: 'NOTES',
-   results
-  });
+  res.send({ 
+    phoneNumber: phoneNumber,
+    user_id: user_id,
+    note: notes,
+   });
 };
 
 // Get a single Note's info
 async function notes_get_note(req, res) {
-  var note;
-  console.log(req.body)
-  console.log(req.params)
-  console.log(req.user)  
+  var note; 
   
   try { 
     note = await db.Notes.findOne({ 
@@ -95,7 +113,7 @@ async function notes_get_note(req, res) {
   }
 
   note = JSON.parse(JSON.stringify(note))
-  console.log(note)
+
   res.render('singleNote', { 
     title: 'GET NOTE',
     results: note,
@@ -146,8 +164,9 @@ async function notes_update_post(req, res) {
   res.redirect('/notes/' + req.params.note_id);
 };
 
-module.exports.notes_create_post = notes_create_post
-module.exports.notes_delete_post = notes_delete_post
-module.exports.notes_get_note = notes_get_note
-module.exports.notes_update_post = notes_update_post
 module.exports.index = index
+module.exports.get_users = get_users
+module.exports.notes_create_post = notes_create_post
+module.exports.notes_get_note = notes_get_note
+module.exports.notes_delete_post = notes_delete_post
+module.exports.notes_update_post = notes_update_post

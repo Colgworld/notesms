@@ -11,6 +11,6 @@ block content
       tbody
           each note in results
             tr
-              td= user.username
+              td= #{username}
               td
                 a(href='notes/' + note.id)= note.text
