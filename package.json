@@ -1,5 +1,5 @@
 {
-  "name": "verify-v2-quickstart-node",
+  "name": "Noted-App",
   "version": "1.0.0",
   "private": false,
   "license": "MIT",
@@ -47,6 +47,7 @@
     "sass-loader": "^7.1.0",
     "sequelize": "^5.8.7",
     "sequelize-cli": "^5.4.0",
+    "serve-favicon": "^2.5.0",
     "should": "^13.2.3",
     "sqlite3": "^4.0.8",
     "style-loader": "^0.23.1",

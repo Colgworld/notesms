@@ -1,12 +1,13 @@
 doctype html
 title
-  | #{title} - Twilio Verify
+  | Noted | #{title}
 meta(charset='utf-8')
 meta(content='width=device-width, initial-scale=1', name='viewport')
 script(src='/javascripts/index.js')
 
-nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-  a.navbar-brand(href='/') Twilio Verify
+nav.navbar.navbar-expand-lg.navbar-dark.bg-transparent
+  a.navbar-brand(href='https://www.notedsms.com')
+    img(src='https://www.notedsms.com/email_assets/logo-white.png', alt='logo-white', style='width:100px; text-align:center;')
   button.navbar-toggler(
     type='button',
     data-toggle='collapse',
@@ -19,23 +20,23 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
   #navbar.navbar-collapse.collapse
     ul.navbar-nav.mr-auto
       if user
-        li.nav-item
-          a.nav-link(href='/users') Users
-        li.nav-item
-          a.nav-link(href='/notes') Notes
     ul.navbar-nav.ml-auto
         if user
           li.nav-item
-            p.navbar-text Welcome, #{user.username}
+            a.nav-link(href='/register') Register
           li.nav-item
             a.nav-link(href='/logout') Log Out
         else
           if current_url !== '/register'
               li.nav-item
+                a.nav-link(href='/login') Login
+              li.nav-item
                 a.nav-link(href='/register') Register
           if current_url !== '/login'
             li.nav-item
               a.nav-link(href='/login') Login
+            li.nav-item
+              a.nav-link(href='/register') Register
 
 section.content
   .container

@@ -9,7 +9,7 @@ router.get(
   ensureLoggedIn(),
   userRoles.can('access secret content'),
   (req, res) => {
-    res.render('index', { title: 'Secrets', username: req.username });
+    res.render('index', { title: 'Welcome Aboard!', username: req.username });
   },
 );
 

@@ -2,7 +2,15 @@ extends layout
 
 block content
   .container
-    h1 #{title}
-    p Congratulations #{user.username}, you have accessed the secret content! 
-    p Phone Number: #{user.phoneNumber}
+    br
+    br
+    br
+    br
+    h1(class='text-white') #{title}
+    br
+    p(class='text-white')  You're all set! You can now text us (at that same number) and we'll keep track of your notes :~) 
+    br
+    p(class='text-white') P.S. Text us the word 'Noted' for help!
+    a(href='sms:8559631871')
+      button.btn.btn-success.btn-block(type='submit') Get Started
     div

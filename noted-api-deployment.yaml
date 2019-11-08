@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: noted-api
+  namespace: noted-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: noted-api
+  template:
+    metadata:
+      labels:
+        app: noted-api
+    spec:
+      containers:
+      - name: noted-api
+        image: colgworld/noted-api
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      

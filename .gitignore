@@ -64,3 +64,5 @@ notesms-googleNL-h234hk92-spoiduu.json
 .idea
 public
 *.sqlite3
+
+*.pem

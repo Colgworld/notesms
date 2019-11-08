@@ -10,6 +10,7 @@ const { Strategy } = require('passport-local');
 const flash = require('flash');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
+const favicon = require('serve-favicon');
 
 // Routes
 const usersRouter = require('./routes/users');
@@ -41,6 +42,7 @@ app.use(bodyParser.json())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(__dirname + '/public/images/favicon.png'));
 
 // initialize authentication middleware
 passport.serializeUser((user, cb) => {

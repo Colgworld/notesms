@@ -2,10 +2,22 @@
 @import '~intl-tel-input/build/css/intlTelInput.css';
 
 
+body {
+  background-color: #0055FF;
+}
+
 .form-group > div > .intl-tel-input {
   width: 100%;
 }
 
 .was-validated, .invalid-feedback {
   display: block;
+}
+
+.title-class {
+  color: #FFFFFF !important;
+}
+
+.p-class {
+  color: #FFFFFF !important;
 }
