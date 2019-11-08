@@ -26,6 +26,7 @@ const db = require('./models');
 const userRoles = require('./userRoles');
 
 const app = express();
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 
 if (app.get('env') === 'development') {
   app.locals.pretty = true;
@@ -42,7 +43,6 @@ app.use(bodyParser.json())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(__dirname + '/images/favicon.ico'));
 
 // initialize authentication middleware
 passport.serializeUser((user, cb) => {
