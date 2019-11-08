@@ -27,7 +27,7 @@ var favicon = require('serve-favicon');
 
 const app = express();
 
-app.use(favicon(__dirname + 'favicon.ico'));
+app.use(favicon(__dirname + '/favicon.ico'));
 
 if (app.get('env') === 'development') {
   app.locals.pretty = true;
