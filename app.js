@@ -10,7 +10,6 @@ const { Strategy } = require('passport-local');
 const flash = require('flash');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
-const favicon = require('serve-favicon');
 
 // Routes
 const usersRouter = require('./routes/users');
@@ -24,9 +23,11 @@ const analyzeRouter = require('./routes/analyze');
 
 const db = require('./models');
 const userRoles = require('./userRoles');
+var favicon = require('serve-favicon');
 
 const app = express();
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
+
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 if (app.get('env') === 'development') {
   app.locals.pretty = true;
