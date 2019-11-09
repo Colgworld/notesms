@@ -55,14 +55,12 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
 notesms-googleNL-h234hk92-spoiduu.json
 
 # next.js build output
 .next
 
 .idea
-public
 *.sqlite3
 
 *.pem
