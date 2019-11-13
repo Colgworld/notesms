@@ -10,7 +10,7 @@ const { Strategy } = require('passport-local');
 const flash = require('flash');
 const cookieSession = require('cookie-session');
 const bodyParser = require('body-parser');
-const favicon = require('serve-favicon');
+const { Pool, Client } = require('pg')
 
 // Routes
 const usersRouter = require('./routes/users');
@@ -20,12 +20,34 @@ const verifyRouter = require('./routes/verify');
 const registerRouter = require('./routes/register');
 const notesRouter = require('./routes/notes');
 const analyzeRouter = require('./routes/analyze');
+const connectionString = process.env.URI
 
+const pool = new Pool({
+  connectionString: connectionString,
+})
+
+pool.query('SELECT NOW()', (err, res) => {
+  console.log(err, res)
+  pool.end()
+})
+
+const client = new Client({
+  connectionString: connectionString,
+})
+
+client.connect()
+// client.query('SELECT NOW()', (err, res) => {
+//   console.log(err, res)
+//   client.end()
+// })
 
 const db = require('./models');
 const userRoles = require('./userRoles');
+var favicon = require('serve-favicon');
 
 const app = express();
+
+app.use(favicon(path.join('public','favicon.ico')));
 
 if (app.get('env') === 'development') {
   app.locals.pretty = true;
@@ -42,7 +64,6 @@ app.use(bodyParser.json())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(favicon(__dirname + '/public/images/favicon.png'));
 
 // initialize authentication middleware
 passport.serializeUser((user, cb) => {
