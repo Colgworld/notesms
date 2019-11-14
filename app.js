@@ -42,6 +42,9 @@ const analyzeRouter = require('./routes/analyze');
 // // })
 
 const db = require('./models');
+
+db.sequelize.sync();
+
 const userRoles = require('./userRoles');
 var favicon = require('serve-favicon');
 
