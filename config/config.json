@@ -9,6 +9,7 @@
   },
   "production": {
     "dialect": "postgres",
-    "storage": "postgres://gtfwhcanlbmxqm:2f56449116cdb81b49e973a1c512a3f8b7c44c8c86de2c1be781522b7c9aba70@ec2-54-221-214-3.compute-1.amazonaws.com:5432/d8d42dte4hilbe"
+    "storage": "postgres://zqczedepziuhkm:10bde09fd95a9b25f934e80bebad48157e96c8746cdda93fa4c645c84f196bc9@ec2-54-221-214-3.compute-1.amazonaws.com:5432/d2vs0r28767kil"
   }
 }
+
