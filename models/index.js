@@ -13,7 +13,7 @@ const db = {};
 let sequelize;
 
 sequelize = new Sequelize(
-  "postgres://zqczedepziuhkm:10bde09fd95a9b25f934e80bebad48157e96c8746cdda93fa4c645c84f196bc9@ec2-54-221-214-3.compute-1.amazonaws.com:5432/d2vs0r28767kil"
+  "postgres://zqczedepziuhkm:10bde09fd95a9b25f934e80bebad48157e96c8746cdda93fa4c645c84f196bc9@ec2-54-221-214-3.compute-1.amazonaws.com:5432/d2vs0r28767kil",
     {
       dialect: "postgres",
       logging: false,
