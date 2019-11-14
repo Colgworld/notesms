@@ -80,7 +80,6 @@ passport.use(new Strategy(
       where: { username },
     })
       .then((user) => {
-        // log.debug(user);
         if (user !== null) {
           if (user.isValidPassword(password)) {
             return done(null, user);

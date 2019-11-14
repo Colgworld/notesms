@@ -12,11 +12,25 @@ const db = {};
 
 let sequelize;
 
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+sequelize = new Sequelize(
+  "postgres://zqczedepziuhkm:10bde09fd95a9b25f934e80bebad48157e96c8746cdda93fa4c645c84f196bc9@ec2-54-221-214-3.compute-1.amazonaws.com:5432/d2vs0r28767kil"
+    {
+      dialect: "postgres",
+      logging: false,
+      pool: {
+        max: 10,
+        min: 0,
+        acquire: 30000,
+        idle: 10000
+      },
+      dialectOptions: {
+        ssl: true
+      },
+      define: {
+        underscored: true
+      }
+    }
+  );
 
 fs
   .readdirSync(__dirname)
