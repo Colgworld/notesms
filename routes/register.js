@@ -14,13 +14,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-  const {
-    username,
-    password,
-    confirmPassword,
-    fullPhone: phoneNumber,
-    verificationMethod,
-  } = req.body;
+  const { username, password, confirmPassword, fullPhone: phoneNumber, verificationMethod } = req.body;
 
   const errors = {};
   const user = await db.User.findOne({ where: { username } });
@@ -38,14 +32,14 @@ router.post('/', async (req, res) => {
   }
 
   if (Object.keys(errors).length === 0) {
-    const hashed_password = db.User.generateHash(password);
+    const hashed_password = await db.User.generateHash(password);
 
     try {
       await db.User.create({
         username,
         password: hashed_password,
         phoneNumber,
-        verificationMethod,
+        verificationMethod
       });
     } catch (e) {
       res.status(500).send(e.toString());

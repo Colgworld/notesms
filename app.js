@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './.env' });
+process.env.NODE_ENV !== 'production' && require('dotenv').config();
 
 const cookieParser = require('cookie-parser');
 const createError = require('http-errors');
@@ -20,14 +20,19 @@ const registerRouter = require('./routes/register');
 const notesRouter = require('./routes/notes');
 const analyzeRouter = require('./routes/analyze');
 
-
 const db = require('./models');
 const userRoles = require('./userRoles');
 var favicon = require('serve-favicon');
 
 const app = express();
 
-app.use(favicon(path.join('public','favicon.ico')));
+// Load DB
+db.sequelize
+  .sync()
+  .then(() => console.log('> Loaded DB.'))
+  .catch(err => console.log(err));
+
+app.use(favicon(path.join('public', 'favicon.ico')));
 
 if (app.get('env') === 'development') {
   app.locals.pretty = true;
@@ -39,8 +44,8 @@ app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,31 +55,34 @@ passport.serializeUser((user, cb) => {
   cb(null, user.id);
 });
 passport.deserializeUser((id, done) => {
-  db.User.findByPk(id).then((user) => { done(null, user); });
+  db.User.findByPk(id).then(user => {
+    done(null, user);
+  });
 });
-passport.use(new Strategy(
-  ((username, password, done) => {
+passport.use(
+  new Strategy((username, password, done) => {
     // log.debug({ username, password });
     // log.debug(process.env.NODE_ENV);
     db.User.findOne({
-      where: { username },
-    })
-      .then((user) => {
-        // log.debug(user);
-        if (user !== null) {
-          if (user.isValidPassword(password)) {
-            return done(null, user);
-          }
+      where: { username }
+    }).then(user => {
+      // log.debug(user);
+      if (user !== null) {
+        if (user.isValidPassword(password)) {
+          return done(null, user);
         }
+      }
 
-        return done(null, false);
-      });
-  }),
-));
+      return done(null, false);
+    });
+  })
+);
 
-app.use(cookieSession({
-  secret: 'replace me in production',
-}));
+app.use(
+  cookieSession({
+    secret: 'replace me in production'
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
